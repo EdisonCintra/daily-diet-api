@@ -4,6 +4,7 @@ from models.refeicao import Refeicao
 from flask import Flask, send_file, jsonify, request
 from database import db
 from flask_login import LoginManager, login_user, current_user, login_required
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -31,6 +32,28 @@ def create_user():
         return jsonify({"message": "Usuário criado com sucesso"}), 201
 
     return jsonify({"message" : "Erro ao criar o usuário"}), 400
+
+@app.route('/create_refeicao', methods=['POST'])
+def create_refeicao():
+    data = request.json
+    nome_refeicao = data.get("nome_refeicao")
+    descricao = data.get("descricao")
+    dentro_dieta = data.get("dentro_dieta")
+    data_hora = datetime.now()
+    user = data.get("user_id")
+
+    new_refeicao = Refeicao(
+        nome_refeicao=nome_refeicao,
+        descricao=descricao,
+        data_hora=data_hora,
+        dentro_dieta=dentro_dieta,
+        user_id=user
+    )
+    db.session.add(new_refeicao)
+    db.session.commit()
+
+    return jsonify({"message": "Refeição criada com sucesso"}), 201
+
 
 def main():
     app.run(port=int(os.environ.get('PORT', 80)))

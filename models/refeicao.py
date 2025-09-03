@@ -2,7 +2,7 @@ from database import db
 
 class Refeicao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(150), nullable=False)
+    nome_refeicao = db.Column(db.String(150), nullable=False)
     descricao = db.Column(db.Text, nullable=True)
     data_hora = db.Column(db.DateTime, nullable=False)
     dentro_dieta = db.Column(db.Boolean, nullable=False)

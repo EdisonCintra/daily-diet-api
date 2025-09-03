@@ -1,3 +1,5 @@
+from database import db
+
 class Refeicao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)

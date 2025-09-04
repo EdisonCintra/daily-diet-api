@@ -94,11 +94,28 @@ def editar_refeicao(refeicao_id):
     return jsonify({"message": "Refeição editada com sucesso"}), 201
 
     
+@app.route('/delete_refeicao/<int:id_refeicao>', methods=['DELETE'])
+@login_required
+def delete_refeicao(id_refeicao):
+    refeicao = Refeicao.query.get(id_refeicao)
+    if not refeicao or refeicao.user_id != current_user.id:
+        return jsonify({"message": "Refeição não encontrada ou não pertence ao usuário"}), 404
+    db.session.delete(refeicao)
+    db.session.commit()
+    return jsonify({"message": "Refeição deletada com sucesso"}), 200
+
+
 @app.route('/users', methods=['GET'])
 def list_users():
     users = User.query.all()
     return jsonify([{"id": u.id, "nome": u.nome, "senha": u.senha} for u in users])
 
+@app.route('/refeicao_por_user', methods=['GET'])
+@login_required
+def list_refeicao_por_user():
+    user_id = current_user.id
+    refeicoes = Refeicao.query.filter_by(user_id=user_id).all()
+    return jsonify([{"id": r.id, "nome_refeicao": r.nome_refeicao, "descricao": r.descricao, "data_hora": r.data_hora, "dentro_dieta": r.dentro_dieta} for r in refeicoes])
 
 
 

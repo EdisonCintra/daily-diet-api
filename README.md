@@ -1,30 +1,30 @@
 # Daily Diet API
 
-Este projeto consiste em uma API para **gerenciamento de refeições** e acompanhamento de dietas, permitindo criar, editar, listar e deletar refeições de usuários cadastrados. A API foi desenvolvida utilizando **Flask** e **Flask-Login** para autenticação de usuários.
+Este projeto consiste em uma API para gerenciamento de refeições e acompanhamento de dietas, permitindo criar, editar, listar e deletar refeições de usuários cadastrados. A API foi desenvolvida utilizando Flask e Flask-Login para autenticação de usuários.
 
 ## Funcionalidades
 
-- Cadastro de usuários (nome e senha).  
-- Login e logout de usuários com gerenciamento de sessão.  
-- Criação de refeições com nome, descrição, se está dentro da dieta e timestamp.  
-- Edição de refeições existentes.  
-- Listagem de todas as refeições de um usuário ou de uma refeição específica.  
-- Exclusão de refeições.  
+- Cadastro de usuários (nome e senha).
+- Login e logout de usuários com gerenciamento de sessão.
+- Criação de refeições com nome, descrição, se está dentro da dieta e timestamp.
+- Edição de refeições existentes.
+- Listagem de todas as refeições de um usuário ou de uma refeição específica.
+- Exclusão de refeições.
 
 ## Tecnologias Utilizadas
 
-- Python 3.11  
-- Flask  
-- Flask-Login  
-- Flask-SQLAlchemy  
-- SQLite  
+- Python 3.11
+- Flask
+- Flask-Login
+- Flask-SQLAlchemy
+- SQLite
 
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado:
 
-- Python 3.11 ou superior  
-- pip  
+- Python 3.11 ou superior
+- pip
 
 ## Instalação e Execução
 
@@ -32,7 +32,6 @@ Antes de começar, certifique-se de ter instalado:
 
 ```bash
 git clone https://github.com/seu-usuario/daily-diet-api
-
 
 Acesse a pasta do projeto:
 
@@ -149,5 +148,4 @@ Todas as rotas de criação, edição, listagem e exclusão de refeições reque
 
 Licença
 
-Este projeto está licenciado sob a Licença MIT
-.
+Este projeto está licenciado sob a Licença MIT.

@@ -50,9 +50,9 @@ Instale as dependências:
 pip install -r requirements.txt
 
 
-Crie o banco de dados utilizando o script shell_create_db.py:
+Crie o banco de dados utilizando o script shell.py:
 
-python shell_create_db.py
+python shell.py
 
 
 Saída esperada:
@@ -68,7 +68,7 @@ python main.py
 A API estará disponível em http://127.0.0.1:5000.
 
 💻 Shell e Testes
-1️⃣ shell_create_db.py
+1️⃣ shell_db.py
 
 Cria o banco de dados database.db e todas as tabelas (User e Refeicao).
 

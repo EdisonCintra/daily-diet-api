@@ -105,11 +105,6 @@ def delete_refeicao(id_refeicao):
     return jsonify({"message": "Refeição deletada com sucesso"}), 200
 
 
-@app.route('/users', methods=['GET'])
-def list_users():
-    users = User.query.all()
-    return jsonify([{"id": u.id, "nome": u.nome, "senha": u.senha} for u in users])
-
 @app.route('/refeicao_por_user', methods=['GET'])
 @login_required
 def list_refeicao_por_user():
@@ -117,6 +112,21 @@ def list_refeicao_por_user():
     refeicoes = Refeicao.query.filter_by(user_id=user_id).all()
     return jsonify([{"id": r.id, "nome_refeicao": r.nome_refeicao, "descricao": r.descricao, "data_hora": r.data_hora, "dentro_dieta": r.dentro_dieta} for r in refeicoes])
 
+@app.route("/listar_refeicao/<int:id_refeicao>", methods=['GET'])
+@login_required
+def list_refeicao_por_id(id_refeicao):
+    refeicao = Refeicao.query.get(id_refeicao)
+    
+    if not refeicao or refeicao.user_id != current_user.id:
+        return jsonify({"message": "Refeição não encontrada ou não pertence ao usuário"}), 404
+
+    return jsonify({
+        "id": refeicao.id,
+        "nome_refeicao": refeicao.nome_refeicao,
+        "descricao": refeicao.descricao,
+        "dentro_dieta": refeicao.dentro_dieta,
+        "data_hora": refeicao.data_hora.strftime("%Y-%m-%d %H:%M:%S")
+    }), 200
 
 
 def main():

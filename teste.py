@@ -7,7 +7,7 @@ r = requests.post(f"{BASE_URL}/create_user", json={"nome": "edison", "senha": "1
 print(r.status_code, r.text)
 
 print("\n=== Login ===")
-s = requests.Session()  # mantém cookies de sessão
+s = requests.Session()  
 r = s.post(f"{BASE_URL}/login", json={"nome": "edison", "senha": "123"})
 print(r.status_code, r.text)
 
@@ -39,8 +39,11 @@ print("\n=== Listar Refeições do Usuário ===")
 r = s.get(f"{BASE_URL}/refeicao_por_user")
 print(r.status_code, r.text)
 
-# suponha que a refeição criada tenha id = 1
-print("\n=== Editar Refeição ===")
+print("\n=== Listar Refeição por ID (2) ===")
+r = s.get(f"{BASE_URL}/listar_refeicao/2")  
+print(r.status_code, r.text)
+
+print("\n=== Editar Refeição (ID 1) ===")
 r = s.put(f"{BASE_URL}/editar-refeicao/1", json={
     "nome_refeicao": "Almoço Atualizado",
     "descricao": "Arroz integral, feijão e peito de frango",
@@ -48,13 +51,16 @@ r = s.put(f"{BASE_URL}/editar-refeicao/1", json={
 })
 print(r.status_code, r.text)
 
-
-print("\n=== Listar Refeições do Usuário ===")
-r = s.get(f"{BASE_URL}/refeicao_por_user")
+print("\n=== Listar Refeição por ID (1 atualizado) ===")
+r = s.get(f"{BASE_URL}/listar_refeicao/1")
 print(r.status_code, r.text)
 
-print("\n=== Deletar Refeição ===")
+print("\n=== Deletar Refeição (ID 1) ===")
 r = s.delete(f"{BASE_URL}/delete_refeicao/1")
+print(r.status_code, r.text)
+
+print("\n=== Listar Refeições do Usuário (após delete) ===")
+r = s.get(f"{BASE_URL}/refeicao_por_user")
 print(r.status_code, r.text)
 
 print("\n=== Logout ===")

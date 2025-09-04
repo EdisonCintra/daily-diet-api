@@ -39,7 +39,6 @@ def login():
     return jsonify({"message": "Credenciais inválidas."}), 401
 
 
-
 @app.route('/create_user', methods=['POST'])
 def create_user():
     data = request.json
@@ -74,6 +73,33 @@ def create_refeicao():
     db.session.commit()
 
     return jsonify({"message": "Refeição criada com sucesso"}), 201
+
+
+@app.route('/editar-refeicao/<int:refeicao_id>', methods=['PUT'])
+@login_required
+def editar_refeicao(refeicao_id):
+    data = request.json
+    refeicao = Refeicao.query.get(refeicao_id) #?
+    user = current_user.id 
+
+    if not refeicao or refeicao.user_id != current_user.id:
+        return jsonify({"message": "Refeição não encontrada ou não pertence ao usuário"}), 404
+
+    refeicao.nome_refeicao = data.get("nome_refeicao")
+    refeicao.descricao = data.get("descricao")
+    refeicao.dentro_dieta = data.get("dentro_dieta")
+    refeicao.data_hora = datetime.now()
+    db.session.commit()
+
+    return jsonify({"message": "Refeição editada com sucesso"}), 201
+
+    
+@app.route('/users', methods=['GET'])
+def list_users():
+    users = User.query.all()
+    return jsonify([{"id": u.id, "nome": u.nome, "senha": u.senha} for u in users])
+
+
 
 
 def main():
